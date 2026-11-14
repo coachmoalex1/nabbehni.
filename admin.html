@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="color-scheme" content="light"><style>html{color-scheme:only light}</style><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="robots" content="noindex,nofollow"><meta property="og:site_name" content="NABBEHNI"><meta property="og:title" content="لوحة نبّهني | NABBEHNI"><meta property="og:description" content="لوحة إدارة نبّهني"><meta property="og:type" content="website"><meta property="og:image" content="https://coachmoalex1.github.io/nabbehni/og.jpg?v=2"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://coachmoalex1.github.io/nabbehni/og.jpg?v=2"><meta name="referrer" content="no-referrer"><title>لوحة نبّهني</title>
+<link rel="icon" type="image/png" href="favicon.png"><link rel="manifest" href="admin.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#9A7414"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="نبّهني">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="supabase.js"></script>
+<script>if(!window.supabase){window.SUPA_CDN=1;document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"><\/script>')}</script>
+<script src="qr.js"></script>
+<style>
+:root{--card:#fff;--ink:#161616;--mute:#6F6F6F;--line:#E3D5A8;--gold:#9A7414;--err:#a8321f;--ok:#1f7a45}
+[hidden]{display:none!important}*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;color:var(--ink);font-family:Cairo,Tahoma,sans-serif;display:flex;flex-direction:column;min-height:100dvh;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);background:radial-gradient(900px 520px at 50% -8%,#F6E7B4 0%,#FFFAEA 42%,#fff 100%) fixed}
+.w{width:100%;max-width:720px;margin:0 auto;flex:1;padding-bottom:20px}
+h2{margin:24px 0 10px;font-size:20px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px;line-height:1.9;font-size:15px;box-shadow:0 2px 10px rgba(154,116,20,.07)}
+input,select,button{font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin:2px}
+input:focus,select:focus,button:focus-visible{outline:3px solid #C9A227;outline-offset:1px}
+button{cursor:pointer;background:#161616;color:#fff;border:0;font-weight:600}button.g{background:#fff;color:var(--ink);border:1.5px solid var(--line)}button.d{background:#fff;color:var(--err);border:1.5px solid #e8b9b0}
+button:disabled{opacity:.4;cursor:default}
+a{color:var(--gold);font-weight:600}
+.cr{width:64px;height:56px;display:block}.cr.s{width:34px;height:30px}
+.gold{background:linear-gradient(135deg,#C9A227,#8A6A12);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ctr{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 0 10px}
+.brand{font-weight:800;font-size:44px;line-height:1.6;margin-top:4px}
+.brand small{display:block;font-size:15px;letter-spacing:.5em;font-weight:600;margin-top:6px;line-height:1.4;padding-inline-start:.5em}
+.fm{width:100%;max-width:340px;margin-top:22px;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(154,116,20,.15)}
+.fm input{display:block;width:100%;margin:0 0 10px;text-align:center}
+.fm .pb{width:100%;margin:2px 0 0;padding:12px;background:linear-gradient(135deg,#C9A227,#8A6A12);font-size:17px}
+.er{color:var(--err);min-height:24px;margin-top:8px;font-size:14px}
+.fm p{margin:0 0 10px;color:var(--mute);font-size:14px}
+#mq img{width:200px;height:200px;background:#fff;border-radius:12px}
+#ms{font-size:13px;word-break:break-all;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:6px}
+.hd{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:14px 0 4px}.hd h1{margin:0;font-size:24px;flex:1}
+.hd .bt{flex:1 0 100%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.bt button{width:100%;padding:10px 4px;font-size:14px;white-space:nowrap}
+.bd{display:inline-block;border-radius:99px;padding:0 10px;font-size:13px;font-weight:600;margin-inline-start:4px}.bd.on{background:#e4f5ea;color:var(--ok)}.bd.off{background:#fbe9e5;color:var(--err)}.bd.end{background:#eee;color:#555}.bd.pl{background:#FBF6E6;color:var(--gold)}
+.bt2{margin-top:8px}
+.oh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:6px}.oh .dt{color:var(--mute);font-size:13px;flex:1}
+.sec{border-top:1px dashed var(--line);padding:8px 0}.lb{font-size:13px;color:var(--gold);font-weight:800}
+.rw{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ch{display:inline-flex;gap:6px;align-items:center;background:#FFF6F3;border:1px solid #f0cfc6;border-radius:99px;padding:2px 12px;margin:2px 0}
+.ch.wa{background:#FBF6E6;border-color:var(--line)}
+#qm{position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;z-index:9}#qm>div{background:#fff;color:#000;padding:20px;border-radius:20px;text-align:center;max-width:92vw}#qb canvas{width:240px;height:240px;image-rendering:pixelated;display:block;margin:auto}
+.ft{text-align:center;padding:22px 0 18px;border-top:1px solid var(--line);margin-top:10px}
+.ft .fb{font-weight:800;font-size:22px}.ft .fs{color:var(--mute);font-size:13px;margin-top:2px}
+.ft .nm{font-weight:800;font-size:20px;margin:2px 0 8px}
+.ft .ct{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.ft .ct a{border:1.5px solid var(--line);border-radius:99px;padding:5px 14px;text-decoration:none;color:var(--ink);font-size:14px;background:#fff}
+.ft .ct a:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:#25D366;margin-inline-end:7px}
+.ft svg{margin:0 auto}
+
+.cu{padding:12px}.cu .oh{padding-bottom:8px}
+.tg2{display:flex;gap:8px;align-items:stretch}
+.tb{display:flex;align-items:center;gap:8px;text-align:start;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:8px 12px;margin:0;min-height:54px;font-weight:600;line-height:1.5}
+.tb.cd{flex:1.7;min-width:0}.tb.cs{flex:1;min-width:0;justify-content:center}
+.tb .tx{flex:1;min-width:0;display:flex;flex-direction:column}.tb .tx b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px}.tb .tx small{color:var(--mute);font-weight:400;direction:ltr;text-align:start;font-size:13px}
+.tb .ar{color:var(--gold);transition:transform .2s;flex:none}.tb[aria-expanded=true]{border-color:var(--gold);background:#FBF6E6}.tb[aria-expanded=true] .ar{transform:rotate(180deg)}
+.pd{display:inline-block;width:9px;height:9px;border-radius:50%;background:#bbb;flex:none}.pd.on{background:#25D366}.pd.off{background:#d4543c}
+.dr{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}.dr.open{grid-template-rows:1fr}
+.dr>div{overflow:hidden;min-height:0;visibility:hidden;transition:visibility .25s}.dr.open>div{visibility:visible}
+.dr .in{padding-top:8px}
+.sk{border:1px solid var(--line);border-radius:14px;padding:10px;margin-top:8px;background:#FFFDF6}
+@media (prefers-reduced-motion:reduce){.dr,.dr>div,.tb .ar{transition:none}}
+#am{position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;z-index:9;overflow:auto;padding:16px}#am>div{background:#fff;color:#161616;padding:18px;border-radius:20px;width:100%;max-width:420px;max-height:92dvh;overflow:auto}#am input{display:block;width:100%;margin:0 0 8px}
+.tgs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}button.tgl{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:92px;padding:8px 12px;border-radius:14px;font-weight:600;margin:0;border:1.5px solid var(--line);line-height:1.5}
+button.tgl b{font-size:12px}button.tgl.on{background:#e4f5ea;color:var(--ok);border-color:#9ad3b0}button.tgl.off{background:#fff;color:var(--mute)}
+.hint2{font-size:13px;color:var(--mute)}.tgst{margin:4px 0 6px}
+#lm{position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;z-index:9;overflow:auto;padding:16px}#lm>div{background:#fff;color:#161616;padding:18px;border-radius:20px;width:100%;max-width:420px;max-height:92dvh;overflow:auto}#lm textarea{width:100%;min-height:150px;font:inherit;font-size:14px;border:1.5px solid var(--line);border-radius:12px;padding:8px}
+@media print{body{background:#fff!important;display:block}body>*:not(#qm){display:none!important}#qm{position:static;background:none}#qm button{display:none}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7E08A"/><stop offset=".5" stop-color="#C9A227"/><stop offset="1" stop-color="#8A6A12"/></linearGradient></defs>
+<symbol id="crown" viewBox="0 0 64 58"><path d="M8 42 3 16l16 12L32 7l13 21 16-12-5 26Z" fill="url(#gd)" stroke="#7A5C0E" stroke-width="1.6" stroke-linejoin="round"/><rect x="8" y="45" width="48" height="9" rx="3" fill="url(#gd)" stroke="#7A5C0E" stroke-width="1.6"/><g fill="url(#gd)" stroke="#7A5C0E" stroke-width="1.4"><circle cx="3" cy="14" r="3.6"/><circle cx="32" cy="5" r="3.6"/><circle cx="61" cy="14" r="3.6"/></g><g fill="#fff" opacity=".9"><circle cx="32" cy="34" r="3"/><circle cx="19" cy="37" r="2"/><circle cx="45" cy="37" r="2"/></g></symbol></svg>
+
+<section id="login" class="ctr" hidden>
+<svg class="cr" style="width:92px;height:82px" aria-hidden="true"><use href="#crown"/></svg>
+<div class="brand gold">نبّهني<small>NABBEHNI</small></div>
+<form id="lf" class="fm"><input id="em" type="email" placeholder="الإيميل" autocomplete="username" required><input id="pw" type="password" placeholder="الباسورد" autocomplete="current-password" required><button class="pb" id="lb">دخول</button><div class="er" id="le" role="alert"></div></form>
+</section>
+
+<section id="pin" class="ctr" hidden>
+<svg class="cr" aria-hidden="true"><use href="#crown"/></svg>
+<div class="brand gold" style="font-size:30px" id="pt">كود الأمان</div>
+<form id="pf" class="fm">
+<p id="pd">اكتب كود الأمان (6 أرقام).</p>
+<input id="pc" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="••••••" dir="ltr" required>
+<input id="pc2" type="password" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="اكتبه تاني للتأكيد" dir="ltr" hidden>
+<button type="button" class="g" id="pg" style="width:100%;margin:0 0 8px" hidden>🎲 ولّد كود عشوائي</button>
+<button class="pb" id="pb">تأكيد</button><div class="er" id="pe" role="alert"></div>
+<button type="button" class="g" id="po" style="width:100%">خروج</button>
+</form>
+</section>
+
+<div id="main" class="w" hidden>
+<div class="hd"><svg class="cr s" aria-hidden="true"><use href="#crown"/></svg><h1 class="gold">لوحة نبّهني</h1><div class="bt"><button class="g" id="inst" hidden>📲 تثبيت</button><button class="g" id="tg" hidden>🔔 تليجرام</button><button class="g" id="dgb">🩺 فحص</button><button class="g" id="acb">⚙ الحساب</button><button class="g" id="appb">📱 التطبيق</button><button class="g" id="bk">⬇ نسخة</button><button class="g" id="out">خروج</button></div></div>
+<div class="c" id="chr" hidden>📲 للتثبيت على الأندرويد افتح اللوحة من متصفح <b>Chrome</b>. التثبيت من متصفحات تانية (زي سامسونج) بيطلّع تحذير «تطبيق غير آمن» من Google Play Protect.</div>
+<div class="c" id="ios" hidden>📲 على الآيفون: دوس زرار المشاركة في Safari، وبعدها «Add to Home Screen».</div>
+<h2>العملاء</h2><button class="g" id="arb" style="margin:0 0 8px">🗄 الأرشيف</button><input id="q" type="search" placeholder="ابحث بالاسم أو الرقم أو رقم الطلب أو كود الستيكر" aria-label="بحث" style="width:100%;margin:0 0 10px" autocomplete="off"><div id="orders"></div>
+<h2>أكواد الخصم</h2>
+<div class="c"><div style="font-size:13px;color:var(--mute);margin-bottom:6px">الأكواد الشغّالة هي اللي بتظهر للعملاء في الموقع. «تفعيل» يظهرها و«إلغاء» يخفيها.</div><input id="pc" placeholder="الكود (إنجليزي)" style="width:140px" maxlength="24" dir="ltr"><input id="pp" type="number" min="1" max="90" placeholder="%" style="width:70px"><input id="pm" type="number" min="1" placeholder="أقصى استخدام" style="width:120px"><button id="pa">إضافة</button></div><div id="pr"></div>
+</div>
+
+<div id="am" hidden><div>
+<h2 style="margin-top:0">⚙ الحساب والأمان</h2>
+<div class="lb">🔢 غيّر كود الأمان</div>
+<input id="a1" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="الكود الحالي" dir="ltr">
+<input id="a2" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="الكود الجديد (6 أرقام)" dir="ltr">
+<div class="rw"><button id="a2b">حفظ الكود</button><button type="button" class="g" id="a2g">🎲 ولّد كود</button></div>
+<div class="er" id="a2e" role="alert"></div>
+<div class="lb" style="margin-top:12px">🔑 غيّر الباسورد (باسورد دخول اللوحة)</div>
+<input id="a3" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="كود الأمان الحالي" dir="ltr">
+<input id="a4" type="password" autocomplete="new-password" placeholder="الباسورد الجديد (10 حروف على الأقل)" dir="ltr">
+<input id="a5" type="password" autocomplete="new-password" placeholder="اكتب الباسورد الجديد تاني" dir="ltr">
+<button id="a5b">حفظ الباسورد</button>
+<div class="er" id="a5e" role="alert"></div>
+<button type="button" class="g" id="ax" style="width:100%;margin-top:8px">إغلاق</button>
+</div></div>
+<div id="lm" hidden><div>
+<h2 style="margin-top:0">🔗 ربط تليجرام للعميل</h2>
+<div class="hint2" id="lmh"></div>
+<textarea id="lmt" readonly></textarea>
+<div class="rw"><button id="lmc">نسخ الرسالة</button><button id="lmk" class="g" hidden>نسخ الكود فقط</button><a id="lmw" target="_blank" rel="noopener"><button type="button" class="g">إرسال للعميل على واتساب</button></a></div>
+<div class="er" id="lme" role="alert"></div>
+<button type="button" class="g" id="lmx" style="width:100%;margin-top:8px">إغلاق</button>
+</div></div>
+<div id="dgm" style="display:none;position:fixed;inset:0;z-index:99;background:#000a;align-items:center;justify-content:center;padding:14px"><div style="background:#fff;border-radius:18px;max-width:520px;width:100%;max-height:88vh;overflow:auto;padding:18px"><h3 style="margin:0 0 10px">🩺 فحص التنبيهات</h3><div id="dgc"></div><div id="dgo">جاري الفحص...</div><div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button id="dgf">🛠 إصلاح الـ webhook</button><button id="dgt">📨 رسالة تجربة</button><button class="g" id="dgr">↻ إعادة الفحص</button><button class="g" id="dgx">إغلاق</button></div></div></div>
+<div id="qm" hidden><div><div id="qb"></div><p id="ql" dir="ltr" style="font-size:13px;word-break:break-all"></p><button id="qd">⬇ تنزيل</button> <button id="qp">طباعة</button> <button class="g" id="qx">إغلاق</button></div></div>
+
+<footer class="ft"><svg class="cr s" aria-hidden="true"><use href="#crown"/></svg><div class="fb gold">نبّهني</div><div class="fs">تطوير الموقع وإدارة وإنشاء</div><div class="nm gold">محمد محمود · أحمد السعيد</div>
+<div class="ct"><a href="https://wa.me/201032537361" target="_blank" rel="noopener">محمد <span dir="ltr">01032537361</span></a><a href="https://wa.me/201100512810" target="_blank" rel="noopener">أحمد <span dir="ltr">01100512810</span></a></div></footer>
+
+<script src="config.js"></script>
+<script>
+if(window.top!==window.self){document.documentElement.innerHTML=""} // منع التضمين (clickjacking)
+var ST={new:"جديد",confirmed:"اتأكد",ready:"جاهز للشحن",shipped:"اتشحن",delivered:"اتسلّم",cancelled:"ملغي"},PN={basic:"أساسية",premium:"بريميوم",elite:"إيليت"},PY={cod:"عند الاستلام",instapay:"إنستاباي"},
+db=supabase.createClient(CFG.url,CFG.key),$=function(i){return document.getElementById(i)},O=[],SK=[],
+esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})},
+CODE_RE=/^[A-Z0-9_-]{3,24}$/,PH_RE=/^01[0125]\d{8}$/;
+function gen(){var a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",v=crypto.getRandomValues(new Uint8Array(8)),s="";v.forEach(function(x){s+=a[x%a.length]});return s}
+function wa(p){return '<a href="https://wa.me/'+esc(String(p).replace("+",""))+'" target="_blank" rel="noopener">واتساب</a>'}
+function view(n){["login","pin","main"].forEach(function(i){$(i).hidden=i!==n})}
+/* QR */
+function qr(code){var u=CFG.site+"/s.html?c="+code,cv=document.createElement("canvas");NabQR.draw(cv,u,880);$("qb").innerHTML="";$("qb").appendChild(cv);$("ql").textContent=u;$("ql").dataset.c=code;$("qm").hidden=false}
+$("qx").onclick=function(){$("qm").hidden=true};$("qp").onclick=function(){print()};
+$("qd").onclick=function(){var code=$("ql").dataset.c,q=document.createElement("canvas"),s=NabQR.draw(q,$("ql").textContent,1000),o=document.createElement("canvas");o.width=s;o.height=s+80;var x=o.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,o.width,o.height);x.drawImage(q,0,0);x.fillStyle="#161616";x.font="700 40px Cairo,Arial";x.textAlign="center";x.fillText(code,s/2,s+40);
+o.toBlob(function(b){dl(b,"nabbehni-"+code+".png")})};
+function dl(b,name){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},5000)}
+/* الدخول + كود الأمان (6 أرقام، بيتراجع في السيرفر مش في المتصفح) */
+var PM="ask";
+async function start(){var s=await db.auth.getSession();if(!s.data.session){view("login");return}
+var a=await db.rpc("is_admin_user");if(a.error)a=await db.rpc("is_admin");
+if(a.data!==true){$("le").textContent="الحساب ده مش أدمن";await db.auth.signOut();view("login");return}
+if(CFG.pin===false)return enter();
+var r=await db.rpc("admin_pin_state");
+if(r.error||!r.data){$("le").textContent="تعذّر قراءة كود الأمان. تأكد إن update-v5.sql اتشغّل في Supabase.";view("login");return}
+if(!r.data.has_pin)return pinShow("setup");
+if(!r.data.verified)return pinShow("ask",r.data.locked);
+enter()}
+function enter(){view("main");load()}
+function weak(c){return /^(\d)\1{5}$/.test(c)||"0123456789".indexOf(c)>-1||"9876543210".indexOf(c)>-1}
+function rnd(){var c;do{var v;do{v=crypto.getRandomValues(new Uint32Array(1))[0]}while(v>=4294000000);c=String(v%1000000).padStart(6,"0")}while(weak(c));return c}
+function pinShow(m,locked){PM=m;view("pin");var su=m==="setup";$("pt").textContent=su?"اعمل كود الأمان":"كود الأمان";
+$("pd").textContent=su?"أول مرة: اختار كود من 6 أرقام (أو ولّد واحد عشوائي واحفظه في مكان آمن). هتكتبه بعد الباسورد في كل دخول.":"اكتب كود الأمان (6 أرقام).";
+$("pc2").hidden=!su;$("pg").hidden=!su;$("pc").type="password";$("pc").value="";$("pc2").value="";$("pb").textContent=su?"حفظ ودخول":"تأكيد";
+$("pe").textContent=locked>0?"الكود مقفول مؤقتًا. جرّب بعد "+Math.ceil(locked/60)+" دقيقة.":"";$("pc").focus()}
+function pinErr(d){if(d.err==="weak")return"الكود سهل التخمين (أرقام متكررة أو متتالية)، اختار غيره";if(d.err==="locked")return"محاولات غلط كتير. الكود مقفول "+Math.ceil((d.secs||900)/60)+" دقيقة.";if(d.err==="exists")return"فيه كود متسجّل بالفعل. حدّث الصفحة.";if(d.err==="nopin")return"لسه مفيش كود. حدّث الصفحة.";return"الكود غلط"+(d.left!=null?" (فاضل "+d.left+" محاولات)":"")}
+$("pg").onclick=function(){var c=rnd();$("pc").type="text";$("pc").value=c;$("pc2").value=c;$("pe").textContent="الكود: "+c+" — احفظه دلوقتي قبل ما تكمل."};
+$("pf").onsubmit=async function(e){e.preventDefault();var c=$("pc").value.replace(/\D/g,""),er=$("pe");er.textContent="";
+if(!/^\d{6}$/.test(c)){er.textContent="اكتب 6 أرقام";return}
+if(PM==="setup"){if(weak(c)){er.textContent=pinErr({err:"weak"});return}if(c!==$("pc2").value.replace(/\D/g,"")){er.textContent="الكودين مش زي بعض";return}}
+$("pb").disabled=true;var r=PM==="setup"?await db.rpc("admin_pin_setup",{p_pin:c}):await db.rpc("admin_pin_verify",{p_pin:c});$("pb").disabled=false;
+if(r.error){er.textContent="حصلت مشكلة: "+r.error.message;return}
+var d=r.data||{};if(d.ok)return enter();er.textContent=pinErr(d);$("pc").value="";$("pc2").value=""};
+$("po").onclick=async function(){await db.auth.signOut();location.reload()};
+
+function lmShow(code,link){$("lm").querySelector("h2").textContent="🔗 ربط تليجرام للعميل";$("lmk").hidden=true;var s=SK.find(function(x){return x.code==code})||{},bot=CFG.tgBot;
+var msg="أهلًا 👋 عشان توصلك تنبيهات عربيتك من نبّهني على تليجرام:\n1) نزّل تليجرام لو مش عندك.\n2) افتح الرابط ده واضغط «Start / ابدأ»:\n"+link+"\nبعدها التنبيهات هتوصلك على بوت «@"+bot+"». الرابط صالح 7 أيام ويشتغل مرة واحدة بس.";
+$("lmh").textContent="ابعت الرسالة دي للعميل. لما يدوس Start بيتربط، وبعدها فعّل قناة «تليجرام» من اللوحة.";$("lmt").value=msg;$("lme").textContent="";
+$("lmw").href="https://wa.me/"+digits(s.owner_phone)+"?text="+encodeURIComponent(msg);$("lm").hidden=false}
+$("lmx").onclick=function(){$("lm").hidden=true};
+$("lmc").onclick=async function(){try{await navigator.clipboard.writeText($("lmt").value);$("lme").style.color="var(--ok)";$("lme").textContent="اتنسخت ✅"}catch(e){$("lmt").select();$("lme").style.color="var(--err)";$("lme").textContent="حدّد النص وانسخه يدويًا"}};
+/* الحساب: تغيير الكود والباسورد */
+function amMsg(id,t,ok){var x=$(id);x.textContent=t;x.style.color=ok?"var(--ok)":"var(--err)"}
+$("acb").onclick=function(){["a1","a2","a3","a4","a5"].forEach(function(i){$(i).value="";$(i).type=i==="a2"||i==="a1"||i==="a3"||i==="a4"||i==="a5"?"password":"text"});amMsg("a2e","");amMsg("a5e","");$("am").hidden=false};
+$("ax").onclick=function(){$("am").hidden=true};
+$("a2g").onclick=function(){var c=rnd();$("a2").type="text";$("a2").value=c;amMsg("a2e","الكود الجديد: "+c+" — احفظه قبل ما تدوس «حفظ الكود».",true)};
+$("a2b").onclick=async function(){var o=$("a1").value.replace(/\D/g,""),n=$("a2").value.replace(/\D/g,"");
+if(!/^\d{6}$/.test(o))return amMsg("a2e","اكتب الكود الحالي (6 أرقام)");if(!/^\d{6}$/.test(n))return amMsg("a2e","الكود الجديد لازم 6 أرقام");if(weak(n))return amMsg("a2e",pinErr({err:"weak"}));
+$("a2b").disabled=true;var r=await db.rpc("admin_pin_change",{p_old:o,p_new:n});$("a2b").disabled=false;
+if(r.error)return amMsg("a2e","حصلت مشكلة: "+r.error.message);if(!r.data.ok)return amMsg("a2e",pinErr(r.data));
+$("a1").value="";$("a2").value="";$("a2").type="password";amMsg("a2e","اتغيّر الكود ✅ والأجهزة التانية هتطلب الكود الجديد.",true)};
+$("a5b").onclick=async function(){var o=$("a3").value.replace(/\D/g,""),p=$("a4").value;
+if(!/^\d{6}$/.test(o))return amMsg("a5e","اكتب كود الأمان الحالي");if(p.length<10)return amMsg("a5e","الباسورد لازم 10 حروف على الأقل");if(p!==$("a5").value)return amMsg("a5e","الباسوردين مش زي بعض");
+$("a5b").disabled=true;var v=await db.rpc("admin_pin_verify",{p_pin:o});
+if(v.error||!v.data||!v.data.ok){$("a5b").disabled=false;return amMsg("a5e",v.error?v.error.message:pinErr(v.data||{}))}
+var u=await db.auth.updateUser({password:p});$("a5b").disabled=false;
+if(u.error)return amMsg("a5e",/different|same/i.test(u.error.message)?"الباسورد الجديد لازم يختلف عن القديم":/reauth|recent/i.test(u.error.message)?"اعمل خروج وادخل تاني وبعدين جرّب":u.error.message);
+await db.auth.signOut({scope:"others"});$("a3").value="";$("a4").value="";$("a5").value="";amMsg("a5e","اتغيّر الباسورد ✅ واتسجّل خروج من باقي الأجهزة.",true)};
+$("lf").onsubmit=async function(e){e.preventDefault();$("le").textContent="";$("lb").disabled=true;var r=await db.auth.signInWithPassword({email:$("em").value.trim(),password:$("pw").value});$("lb").disabled=false;if(r.error){$("le").textContent="بيانات الدخول غلط";return}$("pw").value="";start()};
+$("out").onclick=async function(){await db.auth.signOut();location.reload()};
+/* العرض */
+function sel(arr,cur,map,attr,id){return '<select '+attr+'="'+esc(id)+'">'+arr.map(function(t){return '<option value="'+t+'"'+(t==cur?' selected':'')+'>'+(map?map[t]:t)+'</option>'}).join("")+'</select>'}
+function extras(a){return (a&&a.length)?'<div class="sec"><div class="lb">🚨 أرقام الطوارئ</div>'+a.map(function(n){return '<div class="ch"><span dir="ltr">'+esc(n)+'</span> '+wa(n)+'</div>'}).join(" ")+'</div>':''}
+var P=[],OPEN={},AR=false;
+async function load(){
+var r=await Promise.all([db.from("orders").select("*").order("created_at",{ascending:false}).limit(500),db.from("stickers").select("*").order("created_at",{ascending:false}).limit(1000),db.from("promo_codes").select("*").order("percent",{ascending:false})]);
+O=r[0].data||[];SK=r[1].data||[];P=r[2].data||[];render()}
+function digits(v){return String(v||"").replace(/\D/g,"")}
+function tgl(c,k,on,label){return '<button type="button" class="tgl '+(on?'on':'off')+'" data-sw="'+c+'|'+k+'" aria-pressed="'+(on?'true':'false')+'"><span>'+label+'</span><b>'+(on?'شغّال':'مقفول')+'</b></button>'}
+function chans(x){var c=esc(x.code);
+return '<div class="sec"><div class="lb">📡 قنوات التنبيه</div><div class="hint2">تحكم كامل: فعّل أو اقفل أي قناة (واتساب / SMS / تليجرام) في أي باقة.</div>'+
+'<div class="tgs">'+tgl(c,"wa",x.wa_on,"واتساب")+tgl(c,"sms",x.sms_on,"SMS")+tgl(c,"tg",x.tg_on,"تليجرام")+'</div>'+
+'<div class="rw tgst">'+(x.tg_chat?'<span class="bd on">تليجرام العميل مربوط ✅</span>':'<span class="bd end">تليجرام العميل مش مربوط</span>')+' <button class="g" data-tgl="'+c+'">🔗 رابط الربط</button>'+(x.tg_chat?' <button class="d" data-tgu="'+c+'">فكّ الربط</button>':'')+'</div></div>'}
+function emer(x){if(x.plan!=="elite")return "";var L=x.extra_phones||[],cfg=x.extra_cfg||{},c=esc(x.code);
+return '<div class="sec"><div class="lb">🚨 جهات الطوارئ</div>'+(L.length?L.map(function(n,i){var f=cfg[n]||{};return '<div class="ch"><span dir="ltr">'+esc(n)+'</span> '+wa(n)+'</div><div class="tgs">'+tgl(c,"x"+i+"w",!!f.wa,"واتساب")+tgl(c,"x"+i+"s",!!f.sms,"SMS")+'</div>'}).join(""):'<div class="hint2">مفيش أرقام طوارئ. دوس «تعديل الأرقام» وضيفها، وبعدها فعّل قنواتها من هنا.</div>')+'</div>'}
+function stickerBox(x){var k=esc(x.code);
+return '<div class="sk"><div class="oh"><b dir="ltr">'+k+'</b><span class="bd '+(x.active?'on':'off')+'">'+(x.active?'الستيكر شغّال':'الستيكر معطّل')+'</span></div>'+
+'<div class="rw"><span dir="ltr">'+esc(x.owner_phone)+'</span> '+wa(x.owner_phone)+'</div>'+chans(x)+emer(x)+
+'<div class="bt2"><button class="g" data-qr="'+k+'">QR</button> <button class="g" data-tg="'+k+'">'+(x.active?'تعطيل الستيكر':'تفعيل الستيكر')+'</button> <button class="g" data-ac="'+k+'">📱 كود التطبيق</button> <button class="g" data-vap="'+k+'">👁 شوف تطبيقه</button> <button class="g" data-ed="'+k+'">تعديل الأرقام</button> <button class="d" data-rp="'+k+'">استبدال بكود جديد</button></div></div>'}
+function custCard(x){var id=esc(x.id),sks=SK.filter(function(k){return k.order_id===x.id}),on=sks.some(function(k){return k.active}),d="";
+try{d=new Date(x.created_at).toLocaleDateString("ar-EG",{day:"numeric",month:"long"})}catch(e){}
+var od=OPEN[x.id]==="d",os=OPEN[x.id]==="s",bc=x.status==="delivered"?"on":x.status==="cancelled"?"off":"end";
+var data=x.stub?'<div class="sec"><div class="lb">👤 رقم العميل</div><div class="rw"><span dir="ltr">'+esc(x.phone)+'</span> '+wa(x.phone)+'</div><div style="color:var(--mute);font-size:13px">بيانات الطلب ده مش ظاهرة هنا (طلب أقدم).</div></div>':
+'<div class="sec"><div class="lb">👤 العميل</div><div class="rw"><b>'+esc(x.name)+'</b></div><div class="rw"><span dir="ltr">'+esc(x.phone)+'</span> '+wa(x.phone)+'</div></div>'+
+'<div class="sec"><div class="lb">📍 العنوان</div><div>'+esc(x.gov)+'، '+esc(x.city)+'</div><div>'+esc(x.address)+'</div></div>'+extras(x.extra_phones)+
+'<div class="sec"><div class="lb">💳 الدفع</div><div>'+esc(x.total)+' ج.م · '+esc(PY[x.pay]||x.pay)+(x.promo?' · كود '+esc(x.promo):'')+'</div></div>'+
+'<div class="sec"><div class="lb">📦 حالة الطلب</div>'+sel(Object.keys(ST),x.status,ST,"data-o",x.id)+'</div>';
+var stk=(sks.length?sks.map(stickerBox).join(""):'<div style="color:var(--mute)">لسه مفيش ستيكر للعميل ده.</div>')+(!on&&!x.stub?'<div class="bt2"><button data-mk="'+id+'">'+(sks.length?'توليد ستيكر جديد':'إنشاء ستيكر')+'</button></div>':'');
+return '<div class="c cu"><div class="oh"><b>'+id+'</b><span class="dt">'+esc(d)+'</span><span class="bd pl">'+esc(PN[x.plan]||x.plan)+'</span><span class="bd '+bc+'">'+esc(ST[x.status]||x.status)+'</span></div>'+
+'<div class="tg2"><button type="button" class="tb cd" data-tab="d" data-oid="'+id+'" aria-expanded="'+od+'" aria-controls="dd-'+id+'"><span class="tx"><b>'+esc(x.name||"عميل")+'</b><small>'+esc(x.phone)+'</small></span><span class="ar" aria-hidden="true">▾</span></button>'+
+'<button type="button" class="tb cs" data-tab="s" data-oid="'+id+'" aria-expanded="'+os+'" aria-controls="ds-'+id+'"><span class="pd '+(on?'on':sks.length?'off':'')+'"></span>🏷 الستيكر<span class="ar" aria-hidden="true">▾</span></button></div>'+
+(x.stub?'':'<div class="bt2" style="margin:8px 0 0">'+(AR?'<button data-unarc="'+id+'">↩ استرجاع</button>':'<button class="g" data-arc="'+id+'">🗄 أرشفة</button>')+'<button class="d" data-del="'+id+'">🗑 حذف نهائي</button></div>')+'<div class="dr'+(od?' open':'')+'" id="dd-'+id+'"><div><div class="in">'+data+'</div></div></div>'+
+'<div class="dr'+(os?' open':'')+'" id="ds-'+id+'"><div><div class="in">'+stk+'</div></div></div></div>'}
+function render(){
+var q=($("q").value||"").trim().toLowerCase(),qd=digits(q).replace(/^0+/,""),list=O.slice(),seen={};O.forEach(function(x){seen[x.id]=1});
+SK.forEach(function(k){if(!seen[k.order_id]){seen[k.order_id]=1;list.push({id:k.order_id,stub:true,name:"طلب أقدم",phone:k.owner_phone,plan:k.plan,status:"new",created_at:k.created_at})}});
+list=list.filter(function(x){return !!x.archived===AR});if(q)list=list.filter(function(x){var hay=[x.id,x.name].join(" ").toLowerCase();return hay.indexOf(q)>-1||(qd.length>=3&&digits(x.phone).indexOf(qd)>-1)||SK.some(function(k){return k.order_id===x.id&&(String(k.code).toLowerCase().indexOf(q)>-1||(qd.length>=3&&digits(k.owner_phone).indexOf(qd)>-1))})});
+var na=O.filter(function(x){return x.archived}).length;$("arb").textContent=AR?"← رجوع للعملاء":"🗄 الأرشيف ("+na+")";$("orders").innerHTML=list.map(custCard).join("")||(AR?"الأرشيف فاضي":"مفيش عملاء");
+$("pr").innerHTML=P.map(function(x){var end=x.max_uses&&x.used>=x.max_uses,bd=end?'<span class="bd end">خلص</span>':x.active?'<span class="bd on">شغال · ظاهر للعملاء</span>':'<span class="bd off">موقوف</span>',k=esc(x.code);
+return '<div class="c"><b dir="ltr">'+k+'</b> · '+esc(x.percent)+'% · استخدم '+esc(x.used)+(x.max_uses?'/'+esc(x.max_uses):'')+' '+bd+'<div class="bt2"><button data-pon="'+k+'"'+(x.active?' disabled':'')+'>تفعيل</button><button class="g" data-poff="'+k+'"'+(!x.active?' disabled':'')+'>إلغاء</button><button class="g" data-prn="'+k+'">تعديل الاسم</button></div></div>'}).join("")||"مفيش أكواد"}
+function fail(r){if(r&&r.error){alert(/duplicate/i.test(r.error.message)?"الاسم ده مستخدم قبل كده":r.error.message);return true}return false}
+function newSticker(src){var pl=src.plan;return {code:gen(),order_id:src.order_id||src.id,owner_phone:src.owner_phone||src.phone,plan:pl,wa_on:src.wa_on!=null?src.wa_on:true,sms_on:src.sms_on!=null?src.sms_on:pl!=="basic",tg_on:!!src.tg_on,tg_chat:src.tg_chat||null,extra_phones:src.extra_phones||[],extra_cfg:src.extra_cfg||{}}}
+$("q").oninput=function(){render()};
+document.addEventListener("click",async function(e){var t=e.target.closest("[data-tab],[data-sw],[data-tgl],[data-tgu]")||e.target,d=t.dataset||{};
+if(d.tab){var oid=d.oid,want=d.tab,cur=OPEN[oid];OPEN[oid]=cur===want?"":want;var c=t.closest(".cu");
+[["d","dd-"],["s","ds-"]].forEach(function(z){var open=OPEN[oid]===z[0],dr=document.getElementById(z[1]+oid);if(dr)dr.classList.toggle("open",open);var bt=c.querySelector('[data-tab="'+z[0]+'"]');if(bt)bt.setAttribute("aria-expanded",open)});return}
+if(d.sw){var pp=d.sw.split("|"),st=SK.find(function(x){return x.code==pp[0]});if(!st)return;var kk=pp[1],up={};
+if(/^x\d+[ws]$/.test(kk)){var ix=+kk.slice(1,-1),fl=kk.slice(-1)==="w"?"wa":"sms",nn=(st.extra_phones||[])[ix];if(!nn)return;var cfg=Object.assign({},st.extra_cfg||{}),cu=Object.assign({wa:false,sms:false},cfg[nn]);cu[fl]=!cu[fl];cfg[nn]=cu;up.extra_cfg=cfg}
+else{var col={wa:"wa_on",sms:"sms_on",tg:"tg_on"}[kk],nv=!st[col];
+if(kk==="tg"&&nv&&!st.tg_chat){if(confirm("تليجرام العميل لسه مش مربوط. البوت مش هيقدر يبعتله غير بعد ما العميل يدوس Start من رابط الربط. أطلّعلك رسالة الربط جاهزة للإرسال؟"))tgLink(pp[0]);return}
+up[col]=nv}
+if(!fail(await db.from("stickers").update(up).eq("code",pp[0])))load();return}
+if(d.tgl){if(!CFG.tgBot)return alert("اسم بوت تليجرام مش مكتوب في config.js (tgBot).");var rl=await db.rpc("admin_sticker_tg_link",{p_code:d.tgl});
+if(rl.error||!rl.data)return alert("تعذّر عمل الرابط: "+(rl.error?rl.error.message:"")+"\nتأكد إن update-v7.sql اتشغّل.");lmShow(d.tgl,"https://t.me/"+CFG.tgBot+"?start="+rl.data);return}
+if(d.tgu){if(!confirm("تفك ربط تليجرام العميل؟ هيتقفل التنبيه على تليجرام ليه."))return;if(!fail(await db.from("stickers").update({tg_chat:null,tg_on:false}).eq("code",d.tgu)))load();return}
+if(d.qr)qr(d.qr);
+if(d.mk){OPEN[d.mk]="s";var o=O.find(function(x){return x.id==d.mk}),n=newSticker(o);if(fail(await db.from("stickers").insert(n)))return;await load();qr(n.code)}
+if(d.tg){var s=SK.find(function(x){return x.code==d.tg});if(!fail(await db.from("stickers").update({active:!s.active}).eq("code",d.tg)))load()}
+if(d.rp){var s2=SK.find(function(x){return x.code==d.rp});if(!confirm("هنولّد ستيكر وكود QR جديد بنفس الأرقام ونعطّل القديم (الـ QR القديم مش هيشتغل تاني). تكمل؟"))return;var n2=newSticker(s2);OPEN[s2.order_id]="s";
+if(fail(await db.from("stickers").insert(n2)))return;await db.from("vehicles").update({sticker_code:n2.code}).eq("sticker_code",d.rp);if(fail(await db.from("stickers").update({active:false}).eq("code",d.rp)))return;await load();qr(n2.code)}
+if(d.ed){var s3=SK.find(function(x){return x.code==d.ed}),cur=String(s3.owner_phone).replace("+2","");var p=prompt("رقم العميل (01xxxxxxxxx):",cur);if(p===null)return;p=p.trim();if(!PH_RE.test(p))return alert("رقم غير صحيح");var up={owner_phone:"+2"+p};
+if(s3.plan==="elite"){var x=prompt("أرقام الطوارئ (لحد 3، افصل بينهم بفاصلة، وسيبها فاضية للمسح):",(s3.extra_phones||[]).map(function(n){return n.replace("+2","")}).join(","));if(x===null)return;var L=x.split(/[,،\s]+/).filter(Boolean);if(L.length>3||L.some(function(n){return !PH_RE.test(n)}))return alert("أرقام الطوارئ غير صحيحة (لحد 3 أرقام مصرية)");up.extra_phones=L.map(function(n){return "+2"+n});var oc=s3.extra_cfg||{},nc={};up.extra_phones.forEach(function(n){if(oc[n])nc[n]=oc[n]});up.extra_cfg=nc}
+if(!fail(await db.from("stickers").update(up).eq("code",d.ed)))load()}
+if(d.pon||d.poff){if(!fail(await db.from("promo_codes").update({active:!!d.pon}).eq("code",d.pon||d.poff)))load()}
+if(d.prn){var nm=prompt("الاسم الجديد للكود (حروف إنجليزي وأرقام):",d.prn);if(nm===null)return;nm=nm.trim().toUpperCase();if(!CODE_RE.test(nm))return alert("الاسم لازم يكون من 3 لـ 24 حرف إنجليزي أو رقم أو - أو _");if(nm===d.prn)return;if(!fail(await db.from("promo_codes").update({code:nm}).eq("code",d.prn)))load()}});
+document.addEventListener("change",async function(e){var t=e.target,d=t.dataset||{};
+if(d.o){if(!fail(await db.from("orders").update({status:t.value}).eq("id",d.o)))load()}
+});
+$("pa").onclick=async function(){var c=$("pc").value.trim().toUpperCase(),p=+$("pp").value;if(!CODE_RE.test(c))return alert("الكود لازم يكون من 3 لـ 24 حرف إنجليزي أو رقم أو - أو _");if(!(p>=1&&p<=90))return alert("النسبة من 1 لـ 90");
+var r=await db.from("promo_codes").insert({code:c,percent:p,max_uses:+$("pm").value||null});if(!fail(r)){$("pc").value="";$("pp").value="";$("pm").value="";load()}};
+/* نسخة احتياطية CSV (بتعمّق ضد حقن المعادلات في Excel) */
+function cell(v){v=v==null?"":Array.isArray(v)?v.join(" | "):String(v);if(/^[=+\-@\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'}
+function csv(rows,cols){return "\ufeff"+[cols.join(",")].concat(rows.map(function(r){return cols.map(function(c){return cell(r[c])}).join(",")})).join("\r\n")}
+$("bk").onclick=async function(){await load();var d=new Date().toISOString().slice(0,10);
+dl(new Blob([csv(O,["id","created_at","status","name","phone","plan","total","pay","promo","gov","city","address","extra_phones"])],{type:"text/csv"}),"nabbehni-orders-"+d+".csv");
+setTimeout(function(){dl(new Blob([csv(SK,["code","order_id","owner_phone","plan","wa_on","sms_on","tg_on","active","extra_phones","created_at"])],{type:"text/csv"}),"nabbehni-stickers-"+d+".csv")},600)};
+if(CFG.tgBot)$("tg").hidden=false;
+$("tg").onclick=async function(){var r=await db.rpc("admin_tg_link");if(r.error||!r.data){alert("تعذّر الربط: "+((r.error&&r.error.message)||"")+"\nتأكد إن update-v4.sql اتشغّل.");return}location.href="https://t.me/"+encodeURIComponent(CFG.tgBot)+"?start="+encodeURIComponent(r.data)};
+
+/* فحص التنبيهات: بيكلّم الدالة بصلاحية الأدمن ويقولك السبب بالظبط */
+(function(){var m=$("dgm"),o=$("dgo");
+async function call(a){var s=(await db.auth.getSession()).data.session;if(!s)return{ok:false,err:"سجّل دخول تاني"};
+try{var r=await fetch(CFG.url+"/functions/v1/"+(CFG.fn||"notify"),{method:"POST",headers:{"Content-Type":"application/json",apikey:CFG.key,Authorization:"Bearer "+s.access_token},body:JSON.stringify({action:a})});var t=await r.text();
+try{return JSON.parse(t)}catch(e){return{ok:false,err:"رد غير متوقع ("+r.status+"): "+t.slice(0,160)+" — غالبًا ملف notify-index.ts الجديد لسه مترفعش على الدالة."}}}
+catch(e){return{ok:false,err:"مفيش اتصال بالدالة. راجع اسمها في config.js (fn) وإنها منشورة."}}}
+async function run(){o.textContent="جاري الفحص...";var r=await call("diag");
+if(!r.checks){o.innerHTML='<b style="color:#a8321f">'+esc(r.err||"فشل الفحص")+'</b>';return}
+o.innerHTML=r.checks.map(function(c){return '<div style="margin:6px 0;padding:8px;border-radius:10px;background:'+(c.ok?"#eaf6ee":"#fbeae6")+'">'+(c.ok?"✅ ":"❌ ")+esc(c.t)+(!c.ok&&c.fix?'<div style="font-size:13px;margin-top:4px">الحل: '+esc(c.fix)+'</div>':"")+'</div>'}).join("")+'<div style="font-size:13px;margin-top:8px">واتساب: '+(r.wa?"✅ مجهّز":"❌ مش مجهّز")+' · SMS: '+(r.sms?"✅ مجهّز":"❌ مش مجهّز")+'</div>'}
+$("dgb").onclick=function(){m.style.display="flex";chats();run()};$("dgx").onclick=function(){m.style.display="none"};$("dgr").onclick=run;
+$("dgf").onclick=async function(){var r=await call("diag_fix");alert(r.msg||r.err||"فشل");run()};
+$("dgt").onclick=async function(){var r=await call("diag_test");alert(r.msg||r.err||"فشل")}})();
+
+/* تحكم في أجهزة تليجرام (كتم/تشغيل) */
+async function chats(){var r=await db.from("admin_chats").select("chat_id,name,enabled"),c=$("dgc");
+if(r.error){c.innerHTML='<div style="font-size:13px;color:#a8321f">شغّل update-v8.sql عشان تظهر الأجهزة</div>';return}
+var L=r.data||[];c.innerHTML='<div style="font-weight:700;margin:4px 0">🔔 أجهزة تليجرام</div>'+(L.map(function(x){return '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0"><span>'+esc(x.name||"جهاز")+' <small dir="ltr">'+esc(x.chat_id)+'</small></span><button class="'+(x.enabled?"":"g")+'" data-chs="'+esc(x.chat_id)+'|'+(x.enabled?0:1)+'">'+(x.enabled?"🔕 كتم":"🔔 تشغيل")+'</button></div>'}).join("")||"<small>مفيش أجهزة مربوطة</small>")+(L.length?'<div style="display:flex;gap:8px;margin-top:6px"><button class="g" data-chs="all|0">🔕 كتم الكل</button><button class="g" data-chs="all|1">🔔 تشغيل الكل</button></div>':"")+'<hr style="border:0;border-top:1px solid #eee;margin:12px 0">'}
+$("dgm").addEventListener("click",async function(e){var t=e.target.closest("[data-chs]");if(!t)return;var p=t.dataset.chs.split("|"),q=db.from("admin_chats").update({enabled:p[1]==="1"});
+var r=await(p[0]==="all"?q.not("chat_id","is",null):q.eq("chat_id",p[0]));if(r.error)alert(r.error.message);chats()});
+/* أرشفة / حذف / كود دخول التطبيق */
+$("arb").onclick=function(){AR=!AR;render()};
+document.addEventListener("click",async function(e){var t=e.target.closest("[data-arc],[data-unarc],[data-del],[data-ac]");if(!t)return;var d=t.dataset;
+if(d.arc||d.unarc){var id=d.arc||d.unarc;if(!fail(await db.from("orders").update({archived:!!d.arc,archived_at:d.arc?new Date().toISOString():null}).eq("id",id)))load();return}
+if(d.del){var o=O.find(function(x){return x.id==d.del});if(!confirm("حذف نهائي للطلب "+d.del+" "+(o?o.name:"")+" وكل الستيكرات بتاعته؟ مش هينفع ترجعه. لو عايز تحتفظ بيه استخدم «أرشفة».")||!confirm("متأكد؟ آخر تأكيد."))return;
+if(fail(await db.from("stickers").delete().eq("order_id",d.del)))return;if(!fail(await db.from("orders").delete().eq("id",d.del)))load();return}
+if(d.ac){var s=SK.find(function(x){return x.code==d.ac});if(!s)return;var c=gen();if(fail(await db.from("app_codes").insert({code:c,phone:s.owner_phone})))return;
+var ph=String(s.owner_phone).replace("+2",""),lk=CFG.site+"/app.html#p="+ph+"&c="+c,msg="أهلًا بيك في تطبيق *نبّهني* 🚗\n\nافتح التطبيق من الرابط ده (الكود بيتكتب لوحده):\n"+lk+"\n\nأو ادخل بالبيانات دي:\n📱 رقم الموبايل: "+ph+"\n🔑 كود الدخول: "+c+"\n\n⏳ الكود صالح 7 أيام ويشتغل مرة واحدة.\n🔒 ماتشاركوش مع حد.";
+LMK=c;$("lm").querySelector("h2").textContent="📱 كود تطبيق العميل";$("lmk").hidden=false;$("lmh").textContent="ابعت الرسالة دي للعميل. الرابط بيفتح التطبيق والكود متكتب، والعميل يدوس «دخول».";$("lmt").value=msg;$("lme").textContent="";$("lmw").href="https://wa.me/"+digits(s.owner_phone)+"?text="+encodeURIComponent(msg);$("lm").hidden=false}});
+
+var LMK="";
+$("lmk").onclick=async function(){try{await navigator.clipboard.writeText(LMK);$("lme").style.color="var(--ok)";$("lme").textContent="اتنسخ الكود ✅"}catch(e){prompt("انسخ الكود:",LMK)}};
+async function tgLink(c){if(!CFG.tgBot)return alert("اسم بوت تليجرام مش مكتوب في config.js (tgBot).");var rl=await db.rpc("admin_sticker_tg_link",{p_code:c});if(rl.error||!rl.data)return alert("تعذّر عمل الرابط: "+(rl.error?rl.error.message:"")+"\nتأكد إن update-v7.sql اتشغّل.");lmShow(c,"https://t.me/"+CFG.tgBot+"?start="+rl.data)}
+/* فتح التطبيق كأدمن (حساب تجريبي أو بحساب عميل) من غير كود */
+async function openApp(ph){var w=window.open("","_blank"),s=(await db.auth.getSession()).data.session;if(!s){if(w)w.close();return alert("سجّل دخول تاني")}
+try{var r=await fetch(CFG.url+"/functions/v1/"+(CFG.fn||"notify"),{method:"POST",headers:{"Content-Type":"application/json",apikey:CFG.key,Authorization:"Bearer "+s.access_token},body:JSON.stringify({action:"app_admin",phone:ph||""})}),j=await r.json();
+if(!j.ok)throw new Error(j.err||"فشل");var u=CFG.site+"/app.html#t="+j.token+"&adm=1";if(w)w.location.href=u;else location.href=u}catch(e){if(w)w.close();alert("تعذّر فتح التطبيق: "+(e.message||e)+"\nتأكد إنك نشرت notify-index.ts الجديد وشغّلت update-v10.sql.")}}
+$("appb").onclick=function(){openApp("")};
+document.addEventListener("click",function(e){var t=e.target.closest("[data-vap]");if(!t)return;var s=SK.find(function(x){return x.code==t.dataset.vap});if(s&&confirm("هتفتح تطبيق العميل "+s.owner_phone+" كأدمن. أي تعديل هناك بيتحفظ فعلًا. تكمل؟"))openApp(s.owner_phone)});
+if(window.SUPA_CDN)console.warn("supabase-js محمّلة من CDN: ارفع supabase.js على الريبو");
+var dp=null,UA=navigator.userAgent,CHROME=/Chrome\//.test(UA)&&!/SamsungBrowser|OPR\/|Edg|Vivaldi|Kiwi|DuckDuckGo|UCBrowser|; wv\)/i.test(UA),SA=navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();if(!CHROME)return;dp=e;$("inst").hidden=false});
+$("inst").onclick=async function(){if(!dp)return;dp.prompt();await dp.userChoice;dp=null;$("inst").hidden=true};
+window.addEventListener("appinstalled",function(){$("inst").hidden=true});
+if(/android/i.test(UA)&&!CHROME&&!SA)$("chr").hidden=false;
+if(/iphone|ipad/i.test(navigator.userAgent)&&!navigator.standalone)$("ios").hidden=false;
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
+start();
+</script></body></html>

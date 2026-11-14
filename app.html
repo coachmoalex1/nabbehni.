@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="color-scheme" content="dark"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>تطبيق نبّهني</title><meta property="og:title" content="تطبيق نبّهني"><meta property="og:description" content="أدِر مركباتك ومواعيد الصيانة ومكان الركنة من مكان واحد."><meta property="og:image" content="https://coachmoalex1.github.io/nabbehni/og.jpg?v=2"><meta property="og:type" content="website">
+<link rel="manifest" href="app.webmanifest"><link rel="icon" type="image/png" href="favicon.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#12131F">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://tile.openstreetmap.org; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12131F;--card:#1B1D2E;--card2:#232640;--line:#2C3050;--ink:#F6F2E8;--mute:#9EA2BC;--gold:#E3BE5B;--gold2:#B8902F;--ok:#3CC981;--warn:#F2A33A;--err:#FF6B5B}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{color-scheme:dark}
+body{margin:0;min-height:100dvh;background:radial-gradient(800px 420px at 50% -10%,#2A2650 0%,#171829 45%,#12131F 100%) fixed;color:var(--ink);font-family:Cairo,Tahoma,sans-serif}
+.w{max-width:480px;margin:auto;padding:calc(12px + env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom))}
+h1{font-size:24px;margin:8px 0 4px}h2{font-size:19px;margin:0}p{color:var(--mute);line-height:1.8;margin:0 0 12px}
+.brand{font-weight:800;font-size:28px;background:linear-gradient(135deg,#F7E08A,#C9A227);-webkit-background-clip:text;background-clip:text;color:transparent}
+#hd{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;margin-bottom:10px}#hd .ttl{font-size:18px;flex:1;text-align:center}#hd .hi{font-size:19px;font-weight:800}
+.ib{width:42px;height:42px;border-radius:50%;background:var(--card2);border:1px solid var(--line);color:var(--ink);font-size:18px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;margin:12px 0}
+.row{display:flex;align-items:center;gap:10px}.sp{justify-content:space-between}
+.bd{font-size:12px;border-radius:99px;padding:2px 10px;font-weight:600;background:#2A2D48;color:var(--mute);white-space:nowrap}.bd.ok{background:#173B2C;color:var(--ok)}.bd.warn{background:#412F12;color:var(--warn)}.bd.err{background:#451E1B;color:var(--err)}.bd.gold{background:#3A3017;color:var(--gold)}
+input,select,textarea{width:100%;font:inherit;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card2);color:var(--ink);margin:4px 0 8px}input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+label{font-size:13px;color:var(--mute)}
+button{font:inherit;font-weight:700;border:0;border-radius:16px;padding:13px 18px;background:linear-gradient(135deg,#EFCB6A,#C9A227);color:#1b1608;cursor:pointer}
+button.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold2);padding:8px 14px;border-radius:99px}button.g{background:var(--card2);color:var(--ink);border:1px solid var(--line)}button.d{background:transparent;color:var(--err);border:1px solid #6b2f2a}button:disabled{opacity:.5}
+.full{width:100%;margin-top:6px}.msg{min-height:22px;font-weight:600;margin-top:6px}.msg.ok{color:var(--ok)}.msg.er{color:var(--err)}.hint{font-size:13px;color:var(--mute);line-height:1.8}
+.vc{padding:0;overflow:hidden;cursor:pointer}.vc .im{height:120px;display:flex;align-items:center;justify-content:center;font-size:64px;background:linear-gradient(135deg,#2B2F52,#1B1D2E);position:relative}.vc .im .bd{position:absolute;top:10px;inset-inline-start:10px}.vc .bo{padding:12px 14px}.vc .bo b{font-size:17px}
+.mi{display:flex;align-items:center;gap:12px;width:100%;text-align:start;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:14px;margin:8px 0}.mi.red{color:var(--err)}.mi .ar{margin-inline-start:auto;color:var(--mute)}
+.ch{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px}.ch button{flex:none;background:var(--card2);color:var(--mute);border:1px solid var(--line);padding:8px 14px;border-radius:99px}.ch button.on{color:var(--gold);border-color:var(--gold)}
+.kd{display:flex;gap:10px;margin-bottom:8px}.kd button{flex:1;background:var(--card2);color:var(--mute);border:1px solid var(--line)}.kd button.on{color:var(--gold);border-color:var(--gold);background:#2C2A3A}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:10px 0}.gr small{display:block;color:var(--mute);font-size:12px}.gr b{font-size:14px}
+.f{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.f:last-child{border:0}
+.sw{flex:none;width:48px;height:28px;padding:0;border-radius:99px;background:#3a3d5a;position:relative;border:0}.sw::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:var(--gold2)}.sw.on::after{inset-inline-start:23px}
+.nt{display:flex;gap:12px}.nt .ic{font-size:24px}.nt b{display:block}.nt small{color:var(--mute)}.dot{width:9px;height:9px;border-radius:50%;background:var(--err);flex:none;margin-top:8px}
+.empty{text-align:center;color:var(--mute);padding:34px 10px}
+nav{position:fixed;bottom:0;inset-inline:0;background:#171829f2;backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom));display:flex;max-width:480px;margin:auto}
+nav button{flex:1;background:none;color:var(--mute);padding:6px 2px;font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:12px;position:relative}nav button b{font-size:21px;font-weight:400}nav button.on{color:var(--gold)}
+nav .bg{position:absolute;top:0;inset-inline-start:calc(50% + 6px);background:var(--err);color:#fff;border-radius:99px;font-size:11px;min-width:18px;height:18px;line-height:18px;padding:0 4px}
+#mp{position:relative;height:300px;border-radius:18px;overflow:hidden;background:#2a2d48;touch-action:none;border:1px solid var(--line);direction:ltr}
+#mp .tl img{position:absolute;left:0;top:0;width:256px;height:256px;max-width:none;user-select:none;-webkit-user-drag:none}
+#mp .ln,#mp .ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}#mp .ln line{stroke:#E3BE5B;stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+#mp .pin{position:absolute;transform:translate(-50%,-100%);width:36px;height:36px;border-radius:50% 50% 50% 0;rotate:-45deg;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px #0008}#mp .pin span{rotate:45deg;font-size:17px}
+#mp .pin.me{border-radius:50%;width:18px;height:18px;background:#3b82f6;border:3px solid #fff;transform:translate(-50%,-50%);rotate:0deg}
+#mp .mb{position:absolute;inset-inline-start:8px;width:38px;height:38px;padding:0;border-radius:12px;background:#1B1D2Ecc;color:#fff;font-size:20px;border:1px solid var(--line)}
+#mp .at{position:absolute;bottom:2px;right:6px;font-size:10px;color:#333;background:#fffa;padding:0 4px;border-radius:4px}
+canvas#qc{width:240px;height:240px;background:#fff;border-radius:16px;padding:10px;display:block;margin:6px auto}
+[hidden]{display:none!important}
+</style></head><body><div class="w">
+<section id="vl" hidden><div style="text-align:center;margin-top:30px"><div class="brand">نبّهني</div><h1>أهلًا بيك 👋</h1><p>ادخل برقم موبايلك والكود اللي الإدارة بعتته لك على واتساب.</p></div>
+<div class="card"><label>رقم الموبايل</label><input id="lp" inputmode="numeric" placeholder="01xxxxxxxxx" autocomplete="tel" dir="ltr"><label>كود الدخول</label><input id="lc" placeholder="XXXXXXXX" autocapitalize="characters" autocomplete="off" dir="ltr"><button class="g" id="lpb" type="button" style="padding:8px 14px;margin:0 0 6px;font-size:14px">📋 لصق الكود</button><button class="full" id="lb">دخول</button><div class="msg" id="le" role="status"></div></div>
+<p class="hint" style="text-align:center">معاك ستيكر نبّهني ومعندكش كود؟ كلّم الإدارة على واتساب وهنبعتهولك.</p></section>
+<div id="vm" hidden><div id="adm" class="card" hidden style="border-color:var(--gold2);padding:10px 14px;margin:0 0 10px;font-size:13px"></div><div id="hd"></div><main id="mn"></main></div></div>
+<nav id="nv" hidden><button data-a="tab" data-p="home"><b>🚗</b>مركباتي</button><button data-a="tab" data-p="park"><b>🅿</b>ركنتي</button><button data-a="tab" data-p="notif"><b>🔔</b>الإشعارات<span class="bg" id="bgd" hidden></span></button><button data-a="tab" data-p="set"><b>⚙</b>الإعدادات</button></nav>
+<datalist id="bl"><option>تويوتا</option><option>هيونداي</option><option>كيا</option><option>نيسان</option><option>شيفروليه</option><option>ميتسوبيشي</option><option>سوزوكي</option><option>سكودا</option><option>رينو</option><option>بيجو</option><option>فيات</option><option>بي إم دبليو</option><option>مرسيدس</option><option>أودي</option><option>فولكس فاجن</option><option>هوندا</option><option>فورد</option><option>أوبل</option><option>شيري</option><option>إم جي</option><option>بي واي دي</option><option>جيتور</option><option>جيلي</option><option>هافال</option><option>ياماها</option><option>باجاج</option><option>فيسبا</option><option>بينيلي</option><option>كاواساكي</option></datalist>
+<script src="config.js"></script><script src="qr.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)},API=CFG.url+"/functions/v1/"+(CFG.fn||"notify"),TK="",S={name:"",vs:[],ms:[],ns:[],sk:[]},R=[],A={},V={},KD="car",MF="all",PV="",PM=null,ME=null,MK0=null;
+var LB={brand:"الماركة",model:"الموديل",year:"سنة الصنع",color:"اللون",plate:"رقم اللوحة",name:"الاسم",blood:"فصيلة الدم",emergency:"رقم الطوارئ",medical:"ملاحظات طبية"};
+var GR=[["👤","بياناتك الشخصية",["name"]],["🚑","الطوارئ والبيانات الطبية",["emergency","blood","medical"]],["🚗","بيانات المركبة",["brand","model","year","color","plate"]]];
+var MT={oil:["🛢","فحص/تغيير الزيت",90,5000],tires:["🛞","تغيير الكاوتش",365,40000],brakes:["🛑","الفرامل",365,30000],battery:["🔋","البطارية",730,""],filter:["🌀","الفلاتر",365,15000],service:["🔧","صيانة دورية",180,10000],license:["📄","رخصة المركبة",365,""],other:["🛠","أخرى","",""]};
+var HP=new URLSearchParams(location.hash.slice(1)),ADM=false;
+try{if(/^[a-f0-9]{64}$/.test(HP.get("t")||"")){localStorage.setItem("nb_t",HP.get("t"));localStorage.setItem("nb_adm","1")}else if(HP.get("c")){localStorage.removeItem("nb_t");localStorage.removeItem("nb_adm")}ADM=localStorage.getItem("nb_adm")==="1";TK=localStorage.getItem("nb_t")||""}catch(e){}
+if(location.hash)try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function api(a,p){return fetch(API,{method:"POST",headers:{"Content-Type":"application/json",apikey:CFG.key},body:JSON.stringify(Object.assign({action:a,token:TK},p||{}))}).then(function(r){return r.json()}).catch(function(){return{ok:false,err:"مفيش اتصال، حاول تاني."}}).then(function(r){if(r&&r.auth===false)out();return r})}
+function say(id,t,k){var x=$(id);if(x){x.textContent=t;x.className="msg "+(k||"")}}
+function p2(n){return(n<10?"0":"")+n}function today(){var d=new Date();return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function pd(s){var a=s.split("-");return new Date(+a[0],+a[1]-1,+a[2])}function dd(a,b){return Math.round((pd(b)-pd(a))/864e5)}
+function addD(s,n){var d=pd(s);d.setDate(d.getDate()+n);return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function fd(s){return pd(s).toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric"})}
+function ago(t){var m=Math.max(0,Math.round((Date.now()-new Date(t))/6e4));if(m<2)return"دلوقتي";if(m<60)return"منذ "+m+" دقيقة";var h=Math.round(m/60);if(h<24)return"منذ "+h+" ساعة";var d=Math.round(h/24);return d===1?"أمس":"منذ "+d+" يوم"}
+function VH(id){return S.vs.find(function(v){return v.id===id})}
+function vn(v){var x=v.veh||{};return[x.brand,x.model,x.year].filter(Boolean).join(" ")||"مركبتي"}
+function odoNow(v){return v.odo==null?null:Math.round(v.odo+(+v.daily_km||0)*Math.max(0,(Date.now()-new Date(v.odo_at))/864e5))}
+function due(m,v){var nd=m.last_date&&m.every_days?addD(m.last_date,m.every_days):null,dl=nd?dd(today(),nd):null,on=odoNow(v),kl=m.every_km&&m.last_odo!=null&&on!=null?m.last_odo+m.every_km-on:null,t=[];
+if(dl!=null)t.push(dl<0?"متأخرة "+(-dl)+" يوم":dl===0?"ميعادها النهاردة":"باقي "+dl+" يوم");if(kl!=null)t.push(kl<0?"عدّت بـ "+(-kl)+" كم":"باقي "+kl+" كم");
+return{st:(dl!=null&&dl<0)||(kl!=null&&kl<0)?"over":(dl!=null&&dl<=14)||(kl!=null&&kl<=500)?"soon":"ok",nd:nd,on:on,kl:kl,txt:t.join(" · ")||"—"}}
+function alerts(){var o=[];S.ms.forEach(function(m){var v=VH(m.vehicle_id);if(!v)return;var d=due(m,v);if(d.st!=="ok")o.push({m:m,v:v,d:d})});return o}
+function out(){try{localStorage.removeItem("nb_t");localStorage.removeItem("nb_adm")}catch(e){}TK="";ADM=false;$("vm").hidden=true;$("nv").hidden=true;$("vl").hidden=false}
+/* ===== الدخول ===== */
+$("lpb").onclick=async function(){try{var t=(await navigator.clipboard.readText()).toUpperCase(),m=t.match(/كود[^\n:]*:\s*([A-Z2-9]{8})/)||t.match(/([A-Z2-9]{8})(?![\s\S]*[A-Z2-9]{8})/);if(m){$("lc").value=m[1];say("le","اتلصق الكود ✅","ok")}else say("le","مفيش كود في اللي منسوخ","er")}catch(e){say("le","اللصق مش متاح. اضغط مطولًا في الخانة والصق.","er")}};
+$("lb").onclick=async function(){var p=$("lp").value.replace(/\D/g,"").replace(/^2(?=01)/,""),c=$("lc").value.trim().toUpperCase();
+if(!/^01[0125][0-9]{8}$/.test(p))return say("le","رقم الموبايل غير صحيح","er");if(!/^[A-Z2-9]{8}$/.test(c))return say("le","الكود 8 حروف وأرقام","er");
+$("lb").disabled=true;say("le","جاري الدخول...");TK="";var r=await api("app_login",{phone:"+2"+p,code:c});$("lb").disabled=false;
+if(!r.ok||!r.token)return say("le",r.err||"حصلت مشكلة","er");TK=r.token;try{localStorage.setItem("nb_t",TK)}catch(e){}$("lc").value="";start()};
+async function load(){var r=await api("app_me");if(!r.ok){if(r.auth!==false)alert(r.err||"حصلت مشكلة");return false}S={name:r.name||"",vs:r.vehicles||[],ms:r.maint||[],ns:r.notifs||[],sk:r.stickers||[]};return true}
+async function start(){if(!(await load()))return;$("vl").hidden=true;$("vm").hidden=false;$("nv").hidden=false;R=[{v:"home"}];draw()}
+/* ===== التنقل والرسم ===== */
+function draw(){var r=R[R.length-1],v=V[r.v](r.p||"")||{h:""},top=R.length===1,
+al=S.ns.filter(function(n){return!n.read}).length+alerts().length;
+$("hd").innerHTML=top?(r.v==="home"?'<span class="hi">أهلًا يا '+esc((S.name||"").split(" ")[0]||"بيك")+' 👋</span><button class="ib" data-a="myqr" aria-label="كود المركبة">🔳</button>':'<b class="ttl" style="text-align:start">'+esc(v.t||"")+'</b>'):'<button class="ib" data-a="back" aria-label="رجوع">→</button><b class="ttl">'+esc(v.t||"")+'</b><span class="ib" style="visibility:hidden"></span>';
+$("mn").innerHTML=v.h;document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("on",b.dataset.p===R[0].v)});
+var bg=$("bgd");bg.hidden=!al;bg.textContent=al;var ad=$("adm");ad.hidden=!ADM;if(ADM)ad.innerHTML='👑 وضع الأدمن · أي تعديل هنا بيتحفظ فعلًا. <a href="admin.html" style="color:var(--gold)">رجوع للوحة</a>';window.scrollTo(0,0);if(v.a)v.a()}
+A.go=function(p){var q=p.split("|");R.push({v:q[0],p:q[1]});draw()};A.back=function(){if(R.length>1){R.pop();draw()}};A.tab=function(p){R=[{v:p}];draw()};
+document.addEventListener("click",function(e){var t=e.target.closest("[data-a]");if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.p,t)});
+document.addEventListener("change",function(e){if(e.target.id==="pvs"){PV=e.target.value;draw()}});
+function menu(ic,tx,a,p,red){return'<button class="mi'+(red?" red":"")+'" data-a="'+a+'" data-p="'+esc(p)+'"><span>'+ic+'</span>'+tx+'<span class="ar">‹</span></button>'}
+/* ===== الرئيسية: مركباتي ===== */
+V.home=function(){var h='<div class="row sp"><h2>مركباتي <span class="bd gold">'+S.vs.length+'</span></h2><button class="ghost" data-a="go" data-p="ve|new">＋ إضافة مركبة</button></div>';
+h+=S.vs.map(function(v){var x=v.veh||{},al=alerts().filter(function(a){return a.v.id===v.id}),worst=al.some(function(a){return a.d.st==="over"})?"over":al.length?"soon":"",on=odoNow(v);
+return'<div class="card vc" data-a="go" data-p="vd|'+v.id+'"><div class="im">'+(v.kind==="moto"?"🏍":"🚗")+(v.sticker_code?'<span class="bd ok">الستيكر مربوط</span>':'<span class="bd warn">من غير ستيكر</span>')+(v.stolen?'<span class="bd err" style="top:auto;bottom:10px">بلاغ سرقة</span>':'')+'</div><div class="bo"><b>'+esc(vn(v))+'</b><p style="margin:2px 0 8px">'+(v.kind==="moto"?"موتوسيكل":"سيارة")+(x.color?" • "+esc(x.color):"")+(x.plate?" • لوحة: "+esc(x.plate):"")+'</p>'+
+(worst?'<span class="bd '+(worst==="over"?"err":"warn")+'">'+(worst==="over"?"صيانة متأخرة":"صيانة قربت")+'</span> ':'')+(on!=null?'<span class="bd">⏱ '+on.toLocaleString("ar-EG")+' كم</span>':'')+'</div></div>'}).join("")||'<div class="empty">لسه مفيش مركبات.<br>ضيف مركبتك وابدأ.</div>';return{h:h,t:"مركباتي"}};
+A.myqr=function(){var v=S.vs.find(function(x){return x.sticker_code});if(v)A.go("vq|"+v.id);else alert("اربط ستيكر بمركبة الأول من «تعديل البيانات».")};
+/* ===== تفاصيل مركبة ===== */
+V.vd=function(id){var v=VH(id);if(!v)return{h:"",t:""};return{t:"تفاصيل المركبة",h:'<div class="card" style="text-align:center"><div style="font-size:60px">'+(v.kind==="moto"?"🏍":"🚗")+'</div><h2>'+esc(vn(v))+'</h2><p>'+esc((v.veh||{}).plate||"")+'</p>'+(v.stolen?'<span class="bd err">تم تسجيل بلاغ سرقة</span>':'')+'</div>'+
+menu("✏️","تعديل البيانات","go","ve|"+id)+menu("🔳","عرض كود المركبة","go","vq|"+id)+menu("🛠","الصيانات","go","mt|"+id)+menu("🅿","احفظ مكان ركنتها","parkgo",id)+menu("👁","البيانات الظاهرة للناس","go","vv|"+id)+menu("🚨","الإبلاغ عن سرقة","stolen",id,1)+menu("🗑","حذف المركبة","vdel",id,1)}};
+A.parkgo=function(id){PV=id;A.tab("park")};
+A.vdel=async function(id){if(!confirm("تحذف المركبة وكل صيانتها؟ الستيكر هيفضل بتاعك وتقدر تربطه بمركبة تانية."))return;var r=await api("app_vdel",{id:id});if(r.ok){await load();R=[{v:"home"}];draw()}else alert(r.err||"حصلت مشكلة")};
+A.stolen=async function(id){if(!confirm("تسجّل بلاغ سرقة؟ هنبلّغ الإدارة فورًا وهنتواصل معاك."))return;var r=await api("app_stolen",{id:id});if(r.ok){await load();alert("اتسجّل البلاغ وبلّغنا الإدارة. هنتواصل معاك. لو في خطر اتصل بالشرطة 122.");draw()}else alert(r.err||"حصلت مشكلة")};
+/* ===== إضافة/تعديل مركبة ===== */
+function fl(id,l,v,x){return'<label>'+l+'</label><input id="f_'+id+'" value="'+esc(v)+'" '+(x||"")+'>'}
+V.ve=function(id){var v=id==="new"?null:VH(id),x=v?v.veh||{}:{};KD=v?v.kind:"car";
+var sk=S.sk.filter(function(s){return(s.active&&!s.used)||(v&&s.code===v.sticker_code)});
+return{t:v?"تعديل البيانات":"أضف مركبتك",h:'<div class="card"><label>نوع المركبة</label><div class="kd"><button class="'+(KD==="car"?"on":"")+'" data-a="kind" data-p="car">🚗 سيارة</button><button class="'+(KD==="moto"?"on":"")+'" data-a="kind" data-p="moto">🏍 موتوسيكل</button></div>'+
+fl("brand","الماركة *",x.brand,'list="bl" maxlength="60"')+fl("model","الموديل *",x.model,'maxlength="60"')+fl("year","سنة الصنع",x.year,'inputmode="numeric" maxlength="4"')+fl("color","اللون",x.color,'maxlength="30"')+fl("plate","رقم اللوحة",x.plate,'maxlength="20"')+
+fl("odo","قراءة العداد الحالية (اختياري)",v&&v.odo!=null?odoNow(v):"",'inputmode="numeric" placeholder="مثال: 15000"')+fl("dkm","معدل الاستهلاك اليومي كم/يوم (اختياري)",v&&v.daily_km!=null?v.daily_km:"",'inputmode="decimal" placeholder="مثال: 25"')+'<p class="hint">بنستخدم المعدل ده نحسب مواعيد الصيانة بالكيلومتر.</p></div>'+
+'<div class="card"><h2 style="font-size:16px;margin-bottom:6px">بيانات الطوارئ (اختياري)</h2>'+fl("name","الاسم",x.name||S.name,'maxlength="60"')+fl("emergency","رقم الطوارئ",x.emergency,'inputmode="tel" maxlength="20"')+fl("blood","فصيلة الدم",x.blood,'maxlength="5" placeholder="A+"')+'<label>ملاحظات طبية</label><textarea id="f_medical" rows="2" maxlength="200">'+esc(x.medical)+'</textarea><p class="hint">مش بتظهر لحد غير لما تفعّلها من «البيانات الظاهرة للناس».</p></div>'+
+'<div class="card"><label>ربط الستيكر</label><select id="f_sk"><option value="">— من غير ستيكر —</option>'+sk.map(function(s){return'<option value="'+esc(s.code)+'"'+(v&&s.code===v.sticker_code?" selected":"")+'>'+esc(s.code)+(s.active?"":" (معطّل)")+'</option>'}).join("")+'</select><p class="hint">الستيكرات اللي اشتريتها بتظهر هنا. لو مش لاقي ستيكرك كلّم الإدارة.</p></div>'+
+'<button class="full" data-a="vsave" data-p="'+(v?v.id:"new")+'">حفظ</button><div class="msg" id="fm"></div>'}};
+A.kind=function(p,t){KD=p;t.parentNode.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b===t)})};
+A.vsave=async function(id,t){var g=function(k){return $("f_"+k).value.trim()},veh={};Object.keys(LB).forEach(function(k){veh[k]=g(k)});
+if(!veh.brand||!veh.model)return say("fm","اكتب الماركة والموديل","er");if(veh.emergency&&!/^\+?[0-9 ]{7,15}$/.test(veh.emergency))return say("fm","رقم الطوارئ أرقام بس","er");
+var old=id==="new"?null:VH(id),p={kind:KD,veh:veh,odo:g("odo")===""?null:+g("odo"),daily_km:g("dkm")===""?null:+g("dkm"),sticker_code:$("f_sk").value};
+if(old){p.id=id;if(g("odo")!==""&&+g("odo")===odoNow(old))delete p.odo}else p.vis={brand:true,model:true,color:true};
+t.disabled=true;var r=await api("app_vsave",p);t.disabled=false;if(!r.ok)return say("fm",r.err||"حصلت مشكلة","er");await load();if(old){R.pop()}else R=[{v:"home"}];draw()};
+/* ===== البيانات الظاهرة + كود المركبة ===== */
+V.vv=function(id){var v=VH(id);if(!v)return{h:"",t:""};var s=v.vis||{};return{t:"البيانات الظاهرة للناس",h:'<p>اختار إيه اللي يظهر لأي حد يمسح الكود. رقم موبايلك عمره ما بيظهر.</p>'+GR.map(function(g){var n=g[2].filter(function(k){return s[k]}).length;
+return'<div class="card"><div class="row sp"><b>'+g[0]+' '+g[1]+'</b><span class="bd">'+n+"/"+g[2].length+'</span></div>'+g[2].map(function(k){return'<div class="f"><span>'+LB[k]+'</span><button class="sw'+(s[k]?" on":"")+'" data-a="swt" data-p="'+k+'" aria-label="'+LB[k]+'"></button></div>'}).join("")+'</div>'}).join("")+'<button class="full" data-a="go" data-p="vq|'+id+'">اعرض كود المركبة</button>'}};
+A.swt=async function(k,t){var v=VH(R[R.length-1].p);if(!v)return;t.classList.toggle("on");var s=Object.assign({},v.vis);s[k]=t.classList.contains("on");v.vis=s;var r=await api("app_vsave",{id:v.id,veh:v.veh,vis:s});if(!r.ok){t.classList.toggle("on");v.vis[k]=!s[k];alert(r.err||"حصلت مشكلة")}};
+V.vq=function(id){var v=VH(id);if(!v)return{h:"",t:""};if(!v.sticker_code)return{t:"كود المركبة",h:'<div class="empty">المركبة دي مش مربوطة بستيكر.</div><button class="full" data-a="go" data-p="ve|'+id+'">اربط ستيكر</button>'};
+var s=v.vis||{},x=v.veh||{},ch=Object.keys(LB).filter(function(k){return s[k]&&x[k]});
+return{t:"كود عربيتك",h:'<p>اطبع الكود والزقه على عربيتك. أي حد يعمل Scan هيقدر ينبّهك من غير ما يعرف رقمك.</p><div class="card"><canvas id="qc" width="420" height="420"></canvas><p dir="ltr" style="text-align:center;font-size:12px;word-break:break-all">'+esc(CFG.site+"/s.html?c="+v.sticker_code)+'</p></div><h2 style="font-size:16px">البيانات اللي هتظهر للناس</h2><div class="ch" style="flex-wrap:wrap">'+(ch.map(function(k){return'<span class="bd ok">✓ '+LB[k]+'</span>'}).join(" ")||'<span class="hint">مفيش بيانات ظاهرة (التنبيه بيشتغل عادي).</span>')+'</div><button class="full" data-a="qdl" data-p="'+v.sticker_code+'">⬇ تحميل الكود</button><div class="row" style="margin-top:6px"><button class="g" data-a="cpl" data-p="'+v.sticker_code+'" style="flex:1">📋 نسخ الرابط</button><button class="g" data-a="cpc" data-p="'+v.sticker_code+'" style="flex:1">📋 نسخ الكود</button></div><button class="g full" data-a="go" data-p="vv|'+id+'">تعديل البيانات الظاهرة</button><button class="d full" data-a="rekey" data-p="'+id+'">🔄 توليد كود جديد</button><p class="hint" style="margin-top:6px">الكود الجديد بيبطّل القديم فورًا، وبعدها لازم تطبع الكود الجديد وتبدّل بيه الستيكر.</p>',
+a:function(){NabQR.draw($("qc"),CFG.site+"/s.html?c="+v.sticker_code,420)}}};
+function cp(t){return(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(function(){alert("اتنسخ ✅")},function(){prompt("انسخ من هنا:",t)})}
+A.cpl=function(c){cp(CFG.site+"/s.html?c="+c)};A.cpc=function(c){cp(c)};
+A.rekey=async function(id){if(!confirm("هنولّد كود جديد للمركبة ونبطّل القديم فورًا. الستيكر المطبوع الحالي مش هيشتغل تاني ولازم تطبع الكود الجديد. تكمل؟"))return;var r=await api("app_rekey",{id:id});if(r.ok){await load();draw();alert("اتولّد كود جديد ✅ نزّله واطبعه وبدّل بيه الستيكر.")}else alert(r.err||"حصلت مشكلة")};
+A.qdl=function(c){var cv=document.createElement("canvas");NabQR.draw(cv,CFG.site+"/s.html?c="+c,880);cv.toBlob(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="nabbehni-"+c+".png";document.body.appendChild(a);a.click();a.remove()})};
+/* ===== الصيانات ===== */
+V.mt=function(id){var v=VH(id);if(!v)return{h:"",t:""};var L=S.ms.filter(function(m){return m.vehicle_id===id}),ks=[];L.forEach(function(m){if(ks.indexOf(m.kind)<0)ks.push(m.kind)});if(MF!=="all"&&ks.indexOf(MF)<0)MF="all";
+var h='<div class="ch"><button class="'+(MF==="all"?"on":"")+'" data-a="mf" data-p="all">الكل</button>'+ks.map(function(k){return'<button class="'+(MF===k?"on":"")+'" data-a="mf" data-p="'+k+'">'+(MT[k]||MT.other)[0]+" "+(MT[k]||MT.other)[1]+'</button>'}).join("")+'</div>';
+h+=L.filter(function(m){return MF==="all"||m.kind===MF}).map(function(m){var d=due(m,v),ic=(MT[m.kind]||MT.other)[0],cl=d.st==="over"?"err":d.st==="soon"?"warn":"ok",on=d.on;
+return'<div class="card"><div class="row sp"><div class="row"><span style="font-size:30px">'+ic+'</span><div><b>'+esc(m.title)+'</b><br><small class="hint">'+esc(m.note||"")+'</small></div></div><span class="bd '+cl+'">'+(d.st==="over"?"متأخرة":d.st==="soon"?"قربت":"قادمة")+'</span></div><div class="gr">'+
+'<div><small>آخر صيانة</small><b>'+(m.last_date?fd(m.last_date):"—")+'</b></div><div><small>الصيانة الجاية</small><b>'+(d.nd?fd(d.nd):"—")+'</b></div><div><small>التذكير كل</small><b>'+(m.every_days?m.every_days+" يوم":"—")+(m.every_km?" / "+m.every_km+" كم":"")+'</b></div><div><small>العداد وقت التسجيل</small><b>'+(m.last_odo!=null?m.last_odo+" كم":"—")+'</b></div><div><small>العداد دلوقتي</small><b>'+(on!=null?on+" كم":"—")+'</b></div><div><small>الجاية عند</small><b>'+(m.every_km&&m.last_odo!=null?m.last_odo+m.every_km+" كم":"—")+'</b></div></div>'+
+'<p style="margin:0 0 8px;color:var(--'+cl+')"><b>'+esc(d.txt)+'</b></p><div class="row"><button data-a="mdone" data-p="'+m.id+'" style="flex:1">✅ تمت الصيانة</button><button class="g ib" data-a="go" data-p="mf|'+id+","+m.id+'">✏️</button><button class="d ib" data-a="mdel" data-p="'+m.id+'">🗑</button></div></div>'}).join("")||'<div class="empty">مفيش صيانات مسجّلة.</div>';
+return{t:"سجل الصيانات",h:h+'<button class="full" data-a="go" data-p="mf|'+id+'">＋ إضافة صيانة</button>'}};
+A.mf=function(p){MF=p;draw()};
+A.mdone=async function(id){var m=S.ms.find(function(x){return x.id===id}),v=VH(m.vehicle_id),on=odoNow(v),o=prompt("العداد الحالي بالكيلومتر (اختياري):",on==null?"":on);if(o===null)return;var r=await api("app_mdone",{id:id,odo:o.trim()===""?undefined:o.trim()});if(r.ok){await load();draw()}else alert(r.err||"حصلت مشكلة")};
+A.mdel=async function(id){if(!confirm("تحذف الصيانة دي؟"))return;var r=await api("app_mdel",{id:id});if(r.ok){await load();draw()}else alert(r.err||"حصلت مشكلة")};
+V.mf=function(p){var q=p.split(","),v=VH(q[0]),m=q[1]?S.ms.find(function(x){return x.id===q[1]}):null;if(!v)return{h:"",t:""};KD=m?m.kind:"oil";var on=odoNow(v);
+return{t:m?"تعديل صيانة":"إضافة صيانة",h:'<div class="card"><label>نوع الصيانة</label><div class="ch" style="flex-wrap:wrap">'+Object.keys(MT).map(function(k){return'<button class="'+(k===KD?"on":"")+'" data-a="mkind" data-p="'+k+'"'+(m?"":"")+'>'+MT[k][0]+" "+MT[k][1]+'</button>'}).join("")+'</div>'+
+fl("t","الاسم",m?m.title:MT.oil[1],'maxlength="60"')+fl("n","تفاصيل (مثلًا: نوع الزيت موبيل 1 5W-30)",m?m.note:"",'maxlength="80"')+'<label>تاريخ آخر صيانة</label><input id="f_ld" type="date" value="'+(m&&m.last_date?m.last_date:today())+'">'+fl("lo","العداد وقت الصيانة (كم)",m?(m.last_odo==null?"":m.last_odo):(on==null?"":on),'inputmode="numeric"')+fl("ed","التذكير كل (يوم)",m?(m.every_days||""):MT.oil[2],'inputmode="numeric"')+fl("ek","التذكير كل (كم)",m?(m.every_km||""):MT.oil[3],'inputmode="numeric"')+'</div><button class="full" data-a="msave" data-p="'+q[0]+","+(m?m.id:"")+'">حفظ</button><div class="msg" id="fm"></div>'}};
+A.mkind=function(k,t){KD=k;t.parentNode.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b===t)});if(!R[R.length-1].p.split(",")[1]){$("f_t").value=MT[k][1];$("f_ed").value=MT[k][2];$("f_ek").value=MT[k][3]}};
+A.msave=async function(p,t){var q=p.split(","),g=function(k){return $("f_"+k).value.trim()};t.disabled=true;
+var r=await api("app_msave",{vid:q[0],id:q[1]||undefined,kind:KD,title:g("t"),note:g("n"),last_date:g("ld")||null,last_odo:g("lo")===""?null:+g("lo"),every_days:g("ed")===""?null:+g("ed"),every_km:g("ek")===""?null:+g("ek")});t.disabled=false;
+if(!r.ok)return say("fm",r.err||"حصلت مشكلة","er");await load();R.pop();draw()};
+/* ===== الإشعارات ===== */
+V.notif=function(){var L=alerts().map(function(a){return{ic:(MT[a.m.kind]||MT.other)[0],t:"موعد "+a.m.title+(a.d.st==="over"?" عدّى":" قرّب"),b:vn(a.v)+": "+a.d.txt,w:"",u:a.d.st==="over"}}).concat(S.ns.map(function(n){return{ic:n.kind==="scan"?"🚗":"🔔",t:n.title,b:n.body,w:ago(n.created_at),u:!n.read}}));
+return{t:"الإشعارات",h:L.map(function(n){return'<div class="card nt"><span class="ic">'+n.ic+'</span><div style="flex:1"><b>'+esc(n.t)+'</b><small>'+esc(n.b||"")+'</small><br><small>'+esc(n.w)+'</small></div>'+(n.u?'<span class="dot"></span>':"")+'</div>'}).join("")||'<div class="empty">مفيش إشعارات لسه.<br>أي حد ينبّهك على عربيتك هيظهر هنا.</div>',
+a:function(){if(S.ns.some(function(n){return!n.read}))api("app_nread",{}).then(function(r){if(r.ok){S.ns.forEach(function(n){n.read=true})}})}}};
+/* ===== الركنة والخريطة ===== */
+function P(la,lo,z){var s=256*Math.pow(2,z),sn=Math.sin(la*Math.PI/180);return{x:(lo+180)/360*s,y:(.5-Math.log((1+sn)/(1-sn))/(4*Math.PI))*s}}
+function mkMap(el,pins){var z=17,cx=0,cy=0,W=0,H=0,T={},tl=document.createElement("div"),sv=document.createElementNS("http://www.w3.org/2000/svg","svg"),ov=document.createElement("div"),dr=null,q=0;
+tl.className="tl";sv.setAttribute("class","ln");ov.className="ov";el.appendChild(tl);el.appendChild(sv);el.appendChild(ov);
+[["＋",1,"8px"],["－",-1,"52px"]].forEach(function(b){var x=document.createElement("button");x.className="mb";x.textContent=b[0];x.style.top=b[2];x.onpointerdown=function(e){e.stopPropagation()};x.onclick=function(){zoom(b[1])};el.appendChild(x)});
+var f=document.createElement("button");f.className="mb";f.textContent="🎯";f.style.top="96px";f.onpointerdown=function(e){e.stopPropagation()};f.onclick=function(){fit()};el.appendChild(f);
+var at=document.createElement("div");at.className="at";at.textContent="© OpenStreetMap";el.appendChild(at);
+function zoom(d){var n=Math.max(3,Math.min(19,z+d)),k=Math.pow(2,n-z);cx*=k;cy*=k;z=n;draw()}
+function fit(){W=el.clientWidth;H=el.clientHeight;var a=pins[0],b=pins[1]||pins[0];for(z=18;z>3;z--){var p=P(a.lat,a.lng,z),r=P(b.lat,b.lng,z);if(Math.abs(p.x-r.x)<W*.65&&Math.abs(p.y-r.y)<H*.65)break}var c=P((a.lat+b.lat)/2,(a.lng+b.lng)/2,z);cx=c.x;cy=c.y;draw()}
+function draw(){W=el.clientWidth;H=el.clientHeight;var L=cx-W/2,Tp=cy-H/2,n=Math.pow(2,z),keep={};
+for(var x=Math.floor(L/256);x<=Math.floor((L+W)/256);x++)for(var y=Math.floor(Tp/256);y<=Math.floor((Tp+H)/256);y++){if(y<0||y>=n)continue;var wx=((x%n)+n)%n,k=z+"/"+wx+"/"+y+"/"+x,i=T[k];if(!i){i=T[k]=new Image();i.alt="";i.draggable=false;i.src="https://tile.openstreetmap.org/"+z+"/"+wx+"/"+y+".png";tl.appendChild(i)}i.style.transform="translate("+(x*256-L)+"px,"+(y*256-Tp)+"px)";keep[k]=1}
+Object.keys(T).forEach(function(k){if(!keep[k]){T[k].remove();delete T[k]}});ov.innerHTML="";var pt=[];
+pins.forEach(function(p){var s=P(p.lat,p.lng,z),d=document.createElement("div");d.className="pin "+(p.c||"");d.innerHTML=p.h||"";d.style.left=(s.x-L)+"px";d.style.top=(s.y-Tp)+"px";ov.appendChild(d);pt.push([s.x-L,s.y-Tp])});
+sv.innerHTML=pt.length>1?'<line x1="'+pt[0][0]+'" y1="'+pt[0][1]+'" x2="'+pt[1][0]+'" y2="'+pt[1][1]+'"/>':""}
+function rq(){if(!q)q=requestAnimationFrame(function(){q=0;draw()})}
+el.onpointerdown=function(e){dr={x:e.clientX,y:e.clientY};el.setPointerCapture(e.pointerId)};el.onpointermove=function(e){if(!dr)return;cx-=e.clientX-dr.x;cy-=e.clientY-dr.y;dr={x:e.clientX,y:e.clientY};rq()};el.onpointerup=el.onpointercancel=function(){dr=null};
+fit();return{set:function(p){pins=p;fit()}}}
+function pos(){return new Promise(function(ok,no){if(!navigator.geolocation)return no({code:0});navigator.geolocation.getCurrentPosition(ok,no,{enableHighAccuracy:true,timeout:15000,maximumAge:0})})}
+function gerr(e){return e&&e.code===1?"اسمح للتطبيق بالوصول للموقع من إعدادات المتصفح وجرّب تاني.":"مقدرناش نحدد موقعك. اتأكد إن الـGPS شغّال."}
+function meters(a,b,c,d){var k=Math.PI/180,x=(d-b)*k*Math.cos((a+c)/2*k),y=(c-a)*k;return Math.round(Math.sqrt(x*x+y*y)*6371000)}
+V.park=function(){if(!S.vs.length)return{t:"ركنتي",h:'<div class="empty">ضيف مركبة الأول عشان تحفظ مكان ركنتها.</div>'};if(!VH(PV))PV=S.vs[0].id;var v=VH(PV),p=v.park;
+return{t:"ركنتي",h:(S.vs.length>1?'<select id="pvs">'+S.vs.map(function(x){return'<option value="'+x.id+'"'+(x.id===PV?" selected":"")+'>'+esc(vn(x))+'</option>'}).join("")+'</select>':"")+
+(p?'<div id="mp" aria-label="الخريطة"></div><div class="card"><div class="row sp"><b>'+esc(vn(v))+'</b><span class="bd gold">محفوظة</span></div><p style="margin:6px 0">📍 '+esc(p.note||"مكان محفوظ")+' <small>('+esc(ago(p.at))+')</small></p><div class="row" style="flex-wrap:wrap"><span class="bd" id="pd">⏱ بنحسب المسافة...</span></div><a href="https://www.google.com/maps/dir/?api=1&destination='+p.lat+","+p.lng+'&travelmode=walking" target="_blank" rel="noopener"><button class="full" type="button">🧭 وصّلني لعربيتي</button></a></div>':'<div class="card"><p>لسه محفظتش مكان ركنة لـ'+esc(vn(v))+'.</p></div>')+
+'<div class="card"><label>ملاحظة عن المكان</label><input id="pn" maxlength="120" placeholder="مثلًا: الدور التاني، عمود B12"><button class="'+(p?"g ":"")+'full" data-a="psave">📍 احفظ مكاني الحالي كمكان ركنة</button>'+(p?'<button class="d full" data-a="pclr">مسح المكان المحفوظ</button>':"")+'<div class="msg" id="pm"></div></div>',
+a:function(){if(!p)return;var car={lat:p.lat,lng:p.lng,h:"<span>"+(v.kind==="moto"?"🏍":"🚗")+"</span>"};PM=mkMap($("mp"),[car]);
+pos().then(function(c){if(!$("pd"))return;var m=meters(c.coords.latitude,c.coords.longitude,p.lat,p.lng);$("pd").textContent=m<30?"إنت جنب عربيتك 🎯":"على بعد "+(m>=1000?(m/1000).toFixed(1)+" كم":m+" متر")+" · حوالي "+Math.max(1,Math.round(m/80))+" دقيقة مشي";
+PM.set([car,{lat:c.coords.latitude,lng:c.coords.longitude,c:"me"}])},function(e){if($("pd"))$("pd").textContent=gerr(e)})}}};
+A.psave=async function(){say("pm","بنحدد موقعك...");try{var c=(await pos()).coords}catch(e){return say("pm",gerr(e),"er")}var r=await api("app_park",{id:PV,park:{lat:c.latitude,lng:c.longitude,note:$("pn").value}});
+if(!r.ok)return say("pm",r.err||"حصلت مشكلة","er");await load();draw()};
+A.pclr=async function(){if(!confirm("تمسح مكان الركنة؟"))return;var r=await api("app_park",{id:PV,park:null});if(r.ok){await load();draw()}else say("pm",r.err||"حصلت مشكلة","er")};
+/* ===== الإعدادات والتثبيت ===== */
+var DP=null,SA=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+addEventListener("beforeinstallprompt",function(e){e.preventDefault();DP=e});
+V.set=function(){return{t:"الإعدادات",h:(SA?"":'<div class="card"><h2>📲 ثبّت التطبيق</h2><p>ثبّته وافتحه من الشاشة الرئيسية زي أي تطبيق.</p><button class="full" data-a="inst">تثبيت التطبيق</button><div id="ih" class="hint" hidden style="margin-top:10px"></div></div>')+
+'<div class="card"><h2>💬 كلّم الإدارة</h2><p>أي مشكلة في التثبيت أو الدخول، كلمنا ونحلها معاك.</p><div class="row"><a href="https://wa.me/201032537361" style="flex:1"><button class="g full" type="button">محمد محمود</button></a><a href="https://wa.me/201100512810" style="flex:1"><button class="g full" type="button">أحمد السعيد</button></a></div></div><button class="d full" data-a="lout">تسجيل الخروج</button>'}};
+A.lout=async function(){await api("app_logout");out()};
+A.inst=async function(){var h=$("ih");if(DP){DP.prompt();try{await DP.userChoice}catch(e){}DP=null;return}
+var ua=navigator.userAgent,m=/FBAN|FBAV|Instagram|WhatsApp|Messenger/i.test(ua)?"إنت فاتح الرابط من جوه تطبيق (واتساب/فيسبوك). اضغط ⋮ واختار «فتح في المتصفح» الأول.":/iphone|ipad/i.test(ua)?"على الآيفون: افتح الصفحة في Safari، دوس زرار المشاركة، ثم «Add to Home Screen».":/SamsungBrowser/i.test(ua)?"للتثبيت الأسهل افتح الرابط في Chrome: دوس ⋮ ثم «تثبيت التطبيق» أو «Add to Home screen».":"دوس ⋮ في Chrome ثم «تثبيت التطبيق» أو «Add to Home screen». لو الخيار مش ظاهر، حدّث Chrome وجرّب تاني.";
+h.innerHTML=esc(m)+'<br><br><b>ظهرلك تحذير من Google Play Protect؟</b> ده بيظهر أحيانًا مع التطبيقات اللي بتتثبت من المتصفح. دوس «تفاصيل» أو «More details» ثم «التثبيت على أي حال» (Install anyway). ماتقفلش حماية جوجل كلها، التطبيق نفسه آمن. ولو التحذير فضل أو فيه أي صعوبة، كلّم الإدارة على واتساب من الأسفل وهنحلها معاك.';h.hidden=false};
+if("serviceWorker"in navigator)navigator.serviceWorker.register("app-sw.js").catch(function(){});
+setInterval(async function(){if(!TK||document.hidden)return;var t=R[R.length-1];if(await load()){if(t&&(t.v==="notif"||t.v==="home"))draw();else{var al=S.ns.filter(function(n){return!n.read}).length+alerts().length,bg=$("bgd");bg.hidden=!al;bg.textContent=al}}},60000);
+if(HP.get("c")){$("lp").value=(HP.get("p")||"").replace(/\D/g,"").slice(-11);$("lc").value=(HP.get("c")||"").toUpperCase().replace(/[^A-Z2-9]/g,"").slice(0,8)}
+if(TK)start();else $("vl").hidden=false;
+</script></body></html>
